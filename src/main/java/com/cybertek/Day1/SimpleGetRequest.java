@@ -5,15 +5,13 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 public class SimpleGetRequest {
-String url="http://18.233.99.140:8000/api/spartans";
+
     @Test
     public void test1(){
 
-        Response response = RestAssured.get(url);
+        Response response = RestAssured.get("http://18.233.99.140:8000/api/spartans");
 
-        System.out.println("response.getStatusCode() = " + response.getStatusCode());
 
-        response.prettyPrint();
 
 
     }
