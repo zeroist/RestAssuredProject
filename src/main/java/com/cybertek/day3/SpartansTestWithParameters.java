@@ -5,6 +5,9 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +37,34 @@ public class SpartansTestWithParameters {
         assertEquals("application/json",response.contentType());
         assertTrue(response.body().asString().contains("Not Found"));
 
+    }
 
+    @Test
+    public void test3(){
+        Response response = given().accept(ContentType.JSON).and().queryParam("nameContains", "e").
+                and().queryParam("gender", "Female").log().all().
+                and().get("/api/spartans/search");
+
+        assertEquals(200,response.getStatusCode());
+        assertEquals("application/json",response.contentType());
+        assertTrue(response.body().asString().contains("Female"));
+        assertTrue(response.body().asString().contains("Janette"));
+
+
+    }
+    @Test
+    public void test4(){
+        Map<String,Object>queryMap=new HashMap<>();
+
+        queryMap.put("gender","Female");
+        queryMap.put("nameContains","e");
+
+        Response response = given().accept(ContentType.JSON).queryParams(queryMap).log().all().get("/api/spartans/search");
+       // System.out.println("response.statusCode() = " + response.statusCode());
+        assertEquals(200,response.getStatusCode());
+        assertEquals("application/json",response.contentType());
+        assertTrue(response.body().asString().contains("Female"));
+        assertTrue(response.body().asString().contains("Janette"));
 
     }
 
