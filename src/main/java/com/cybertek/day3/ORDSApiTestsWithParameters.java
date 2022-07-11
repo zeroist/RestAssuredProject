@@ -27,6 +27,16 @@ public class ORDSApiTestsWithParameters {
         assertEquals("application/json",response.header("content-type"));
         assertTrue(response.body().asString().contains("United States of America"));
 
+    }
+
+    @Test
+    public void test2(){
+        Response response = given().accept(ContentType.JSON).and().queryParam("q", "{\"job_id\": \"IT_PROG\"}")
+                .when().get("/employees");
+
+        assertEquals(200,response.getStatusCode());
+        assertEquals("application/json",response.contentType());
+        System.out.println(response.asPrettyString());
 
 
     }
