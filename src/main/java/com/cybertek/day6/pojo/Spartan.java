@@ -1,4 +1,4 @@
-package com.cybertek.day6.pojp;
+package com.cybertek.day6.pojo;
 /*
     "id": 15,
     "name": "Meta",
